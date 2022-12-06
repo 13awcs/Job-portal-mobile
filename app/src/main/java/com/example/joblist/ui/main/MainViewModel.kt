@@ -1,20 +1,22 @@
 package com.example.joblist.ui.main
 
+import android.content.Context
 import android.util.Log
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.joblist.api.AppRetrofit
 import com.example.joblist.api.services.AppService
-import com.example.joblist.entities.Candidate
-import com.example.joblist.entities.CreatedJobResponse
-import com.example.joblist.entities.EditedJobResponse
-import com.example.joblist.entities.User
+import com.example.joblist.entities.*
 import com.example.joblist.entities.apply.ApplyResponse
+import com.example.joblist.ui.main.database.AppDatabase
 import com.example.joblist.utils.Resource
 import kotlinx.coroutines.*
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import retrofit2.awaitResponse
+import java.util.*
 
 class MainViewModel : ViewModel() { 
     private val appService: AppService by lazy {
@@ -65,6 +67,81 @@ class MainViewModel : ViewModel() {
 
     private val _deleteJobState = MutableStateFlow<Resource<EditedJobResponse>>(Resource.Loading(false))
     val deleteJobState = _deleteJobState.asStateFlow()
+
+    private val _getAllNewsState = MutableStateFlow<Resource<MutableList<News>>>(Resource.Loading(false))
+    val getAllNewsState = _getAllNewsState.asStateFlow()
+
+    private val _deleteNewsState = MutableStateFlow<Resource<String>>(Resource.Loading(false))
+    val deleteNewsState = _deleteNewsState.asStateFlow()
+
+    private val _createNewsState = MutableStateFlow<Resource<String>>(Resource.Loading(false))
+    val createNewsState = _createNewsState.asStateFlow()
+
+    fun getAllNews(context: Context) {
+        job = viewModelScope.launch(coroutineExceptionHandler) {
+            _getAllNewsState.emit(Resource.Loading(true))
+            withContext(Dispatchers.IO) {
+                try {
+                    _getAllNewsState.emit(Resource.Success(
+                        data = AppDatabase.getInstance(context)!!.newsDao().getAll(),
+                        message= "Successfully")
+                    )
+                } catch (e:Exception) {
+                    _getAllNewsState.emit(Resource.Error(e.message!!))
+                }
+            }
+        }.also {
+            it.invokeOnCompletion {
+                viewModelScope.launch {
+                    _getAllNewsState.emit(Resource.Loading(false))
+                }
+            }
+        }
+    }
+
+    fun deleteNews(context: Context, news: News) {
+        job = viewModelScope.launch(coroutineExceptionHandler) {
+            _deleteNewsState.emit(Resource.Loading(true))
+            withContext(Dispatchers.IO) {
+                try {
+                    AppDatabase.getInstance(context)!!.newsDao().delete(news)
+                    getAllNews(context)
+                    _deleteNewsState.emit(Resource.Success(null, message= "Done"))
+                } catch (e:Exception) {
+                    _deleteNewsState.emit(Resource.Error(e.message!!))
+                }
+            }
+        }.also {
+            it.invokeOnCompletion {
+                viewModelScope.launch {
+                    _deleteNewsState.emit(Resource.Loading(false))
+                }
+            }
+        }
+    }
+
+    fun createNews(context: Context, title: String, content: String) {
+        job = viewModelScope.launch(coroutineExceptionHandler) {
+            _createNewsState.emit(Resource.Loading(true))
+            withContext(Dispatchers.IO) {
+                try {
+                    AppDatabase.getInstance(context)!!.newsDao().insert(
+                        News(null, title, content, Date().toString())
+                    )
+                    getAllNews(context)
+                    _createNewsState.emit(Resource.Success(null, message= "Done"))
+                } catch (e:Exception) {
+                    _createNewsState.emit(Resource.Error(e.message!!))
+                }
+            }
+        }.also {
+            it.invokeOnCompletion {
+                viewModelScope.launch {
+                    _createNewsState.emit(Resource.Loading(false))
+                }
+            }
+        }
+    }
 
     fun getAllApplies() {
         job = viewModelScope.launch(coroutineExceptionHandler) {

@@ -30,4 +30,6 @@
     <string name="rejected">Rejected</string>
     <string name="accepted">Accepted</string>
     <string name="recent_applies">Recent applies</string>
+    <string name="content">Content</string>
+    <string name="news">News</string>
 </resources>

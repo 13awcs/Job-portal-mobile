@@ -5,16 +5,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.joblist.databinding.RowApplyBinding
-import com.example.joblist.entities.apply.Apply
+import com.example.joblist.databinding.RowNewsBinding
+import com.example.joblist.entities.News
 
-class ApplyAdapter : ListAdapter<Apply, RecyclerView.ViewHolder>(DiffCallback()) {
-    private lateinit var binding: RowApplyBinding
+class NewsAdapter : ListAdapter<News, RecyclerView.ViewHolder>(DiffCallback()) {
+    private lateinit var binding: RowNewsBinding
     var listener: Listener? = null
-    private var applies = mutableListOf<Apply>()
+    private var newsList = mutableListOf<News>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        binding = RowApplyBinding.inflate(
+        binding = RowNewsBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -26,36 +26,40 @@ class ApplyAdapter : ListAdapter<Apply, RecyclerView.ViewHolder>(DiffCallback())
         (holder as ViewHolder).displayData(getItem(position))
     }
 
-    fun submitData(applies: MutableList<Apply>?) {
-        this.applies = applies!!
+    fun submitData(newsList: MutableList<News>?) {
+        this.newsList = newsList!!
         notifyDataSetChanged()
-        submitList(applies)
+        submitList(newsList)
     }
 
     class ViewHolder(
-        private val binding: RowApplyBinding,
+        private val binding: RowNewsBinding,
         private val listener: Listener?
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun displayData(apply: Apply) {
-            binding.tvJobName.text = apply.jobApply.title
-            binding.tvSalary.text = apply.jobApply.salary.toString()
-            binding.tvAddress.text = apply.jobApply.location
-            binding.tvCandidateName.text = "Applied by ${apply.candidateApply.name}"
+        fun displayData(news: News) {
+            binding.tvTitle.text = news.title
+            binding.tvContent.text = news.content
+            binding.tvCreatedDate.text = news.createdDate
             itemView.setOnClickListener {
                 listener?.onClick(adapterPosition)
+            }
+            itemView.setOnLongClickListener{
+                listener?.onLongClick(adapterPosition)
+                true
             }
         }
     }
 
-    class DiffCallback : DiffUtil.ItemCallback<Apply>() {
-        override fun areItemsTheSame(oldItem: Apply, newItem: Apply): Boolean =
+    class DiffCallback : DiffUtil.ItemCallback<News>() {
+        override fun areItemsTheSame(oldItem: News, newItem: News): Boolean =
             oldItem === newItem
 
-        override fun areContentsTheSame(oldItem: Apply, newItem: Apply): Boolean =
+        override fun areContentsTheSame(oldItem: News, newItem: News): Boolean =
             oldItem.id == newItem.id
     }
 
     interface Listener {
         fun onClick(position: Int)
+        fun onLongClick(position: Int)
     }
 }

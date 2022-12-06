@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
@@ -248,6 +249,7 @@ class JobFragment : BaseFragment() {
     }
 
     private fun modifyJob(isNew: Boolean) {
+        Log.d("DATLT", "modifyJob: $isNew")
         if (isNew) {
             //todo add new Job
             activityViewModel.createJob(

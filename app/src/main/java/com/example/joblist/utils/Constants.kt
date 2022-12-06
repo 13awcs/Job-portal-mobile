@@ -7,4 +7,5 @@ object Constants {
     const val KEY_UID = "uid"
     const val EXTRAS_CANDIDATE = "candidate"
     const val EXTRAS_JOB = "job"
+    const val EXTRAS_NEWS = "new"
 }

@@ -5,40 +5,33 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:fillViewport="true"
-    android:scrollbars="none"
-    tools:context=".ui.login.LoginActivity">
+    android:scrollbars="none">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="@dimen/_15sdp">
+        android:padding="@dimen/_8sdp">
 
         <TextView
+            android:id="@+id/tvId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/login"
-            android:textSize="@dimen/_18ssp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Let find your employee in the world" />
+            android:visibility="gone" />
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/_8sdp"
-            android:hint="@string/username"
+            android:hint="@string/title"
             android:textColorHint="@color/black"
             app:counterEnabled="true"
             app:counterMaxLength="30"
             app:endIconMode="clear_text">
 
             <EditText
-                android:id="@+id/etUsername"
+                android:id="@+id/etTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints=""
@@ -55,18 +48,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/_8sdp"
-            android:hint="@string/password"
+            android:hint="@string/content"
             android:textColorHint="@color/black"
             app:counterEnabled="true"
-            app:counterMaxLength="30"
-            app:passwordToggleEnabled="true">
+            app:counterMaxLength="300"
+            app:endIconMode="clear_text">
 
             <EditText
-                android:id="@+id/etPassword"
+                android:id="@+id/etContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints=""
-                android:inputType="textPassword"
+                android:inputType="textMultiLine"
+                android:minLines="5"
                 android:maxLength="30"
                 android:padding="@dimen/_16sdp"
                 android:textColor="@color/black"
@@ -74,29 +68,28 @@
                 tools:ignore="LabelFor" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
-            android:id="@+id/btLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/login" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/btCancel"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_5sdp"
-                android:text="@string/dont_have_an_account" />
+                android:layout_marginEnd="@dimen/_4sdp"
+                android:layout_weight="1"
+                android:backgroundTint="@android:color/darker_gray"
+                android:text="@string/cancel" />
 
-            <TextView
-                android:id="@+id/tvGoToRegister"
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/btOK"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/register_link"
-                android:textColor="@android:color/holo_purple" />
+                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_weight="1"
+                android:text="@string/ok" />
         </LinearLayout>
+
     </LinearLayout>
 </ScrollView>
