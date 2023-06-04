@@ -6,42 +6,42 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface  AppService {
-    @GET("/applies/newest")
+    @GET("candidate/apply/applies/newest")
     fun getAllApplies(): Call<ApplyResponse>
 
-    @POST("/login")
+    @POST("/recruit/recruiter/login")
     fun login(@Body login: Login): Call<UserResponse>
 
     @POST("/register")
     fun register(@Body register: Register): Call<UserResponse>
 
-    @GET("/profile")
+    @GET("/recruit/recruiter/profile")
     fun getProfile(@Query("username") username: String): Call<User>
 
-    @POST("/profile/edit")
+    @POST("/recruit/recruiter/profile/edit")
     fun editProfile(@Query("id") id: Long, @Body newUser: User): Call<User>
 
-    @GET("/candidates")
+    @GET("/candidate/candidates")
     fun getAllCandidate(): Call<List<Candidate>>
 
-    @GET("/candidate/1/")
-    fun getCandidateById(@Query("id") id: Long): Call<Candidate>
+    @GET("/candidate/candidate/{id}")
+    fun getCandidateById(@Path("id") id: Long): Call<Candidate>
 
 //    @GET("/candidates/search")
 //    fun searchCandidate(@Query("keyword") keyword: String?): Call<List<Candidate?>?>?
 
-    @GET("/jobs/recruiter/{id}")
+    @GET("/recruit/job/jobs/recruiter/{id}")
     fun getAllJobs(@Path("id") recruiterId: Long): Call<List<Job>>
 
-    @GET("/jobs/{id}")
+    @GET("/recruit/job/{id}")
     fun getJobById(@Path("id") id: Long): Call<Job?>
 
     @POST("/jobs/create")
     fun createJobs(@Body job: Job): Call<CreatedJobResponse>
 
-    @PUT("/jobs/edit/{id}")
+    @PUT("recruit/job/edit/{id}")
     fun editJobs(@Path("id") id: Long, @Body newJob: Job): Call<EditedJobResponse>
 
-    @DELETE("/jobs/delete/{id}")
+    @DELETE("recruit/job/delete/{id}")
     fun deleteJobs(@Path("id") id: Long): Call<EditedJobResponse>
 }

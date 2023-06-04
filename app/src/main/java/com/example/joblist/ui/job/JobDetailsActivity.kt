@@ -28,7 +28,7 @@ class JobDetailsActivity : AppCompatActivity() {
                 binding.etName.setText(job!!.title)
                 binding.etSalary.setText(job!!.salary.toString())
                 binding.etAddress.setText(job!!.location)
-                binding.etApplied.setText(job!!.applyAmount.toString())
+                binding.etApplied.setText(job!!.apply.toString())
             }
 
             Log.e("TAG", "setView: $job", )

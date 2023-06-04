@@ -98,7 +98,7 @@ class JobAdapter : ListAdapter<Job, RecyclerView.ViewHolder>(DiffCallback()), Fi
             binding.tvName.text = job.title
             binding.tvSalary.text = "${job.salary}$"
             binding.tvAddress.text = job.location
-            binding.tvApplied.text = "Applied: ${job.applyAmount}"
+            binding.tvApplied.text = "Applied: ${job.apply}"
             itemView.setOnClickListener {
                 listener?.onClick(adapterPosition)
             }

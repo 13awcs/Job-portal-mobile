@@ -5,7 +5,7 @@ import java.io.Serializable
 data class Job(
     val id: Long = 0,
     val amount: Int = 0,
-    val applyAmount: Int = 0,
+    val apply: Int = 0,
     val category: String = "",
     val companyName: String = "",
     val createAt: String = "",

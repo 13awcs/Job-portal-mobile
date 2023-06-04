@@ -35,6 +35,8 @@ class CandidateDetailsActivity : AppCompatActivity() {
                 binding.etName.setText(candidate!!.name)
                 binding.etEmail.setText(candidate!!.email)
                 binding.etPhone.setText(candidate!!.phone)
+                binding.etAddress.setText(candidate!!.address)
+                binding.etCategory.setText(candidate!!.category)
             }
 
             Log.e("TAG", "setView: $candidate", )

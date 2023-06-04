@@ -100,5 +100,59 @@
                 android:textSize="@dimen/_14ssp"
                 tools:ignore="LabelFor" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/_8sdp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:hint="Address"
+            android:textColorHint="@color/black"
+            app:counterEnabled="true"
+            app:counterMaxLength="30"
+            app:endIconMode="clear_text">
+
+            <EditText
+                android:id="@+id/etAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:enabled="false"
+                android:inputType="text"
+                android:maxLength="30"
+                android:padding="@dimen/_16sdp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14ssp"
+                tools:ignore="LabelFor" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/_8sdp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:hint="Category"
+            android:textColorHint="@color/black"
+            app:counterEnabled="true"
+            app:counterMaxLength="30"
+            app:endIconMode="clear_text">
+
+            <EditText
+                android:id="@+id/etCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:enabled="false"
+                android:inputType="text"
+                android:maxLength="30"
+                android:padding="@dimen/_16sdp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14ssp"
+                tools:ignore="LabelFor" />
+        </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 </ScrollView>
