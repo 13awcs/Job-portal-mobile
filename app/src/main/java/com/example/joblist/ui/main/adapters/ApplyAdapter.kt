@@ -37,10 +37,10 @@ class ApplyAdapter : ListAdapter<Apply, RecyclerView.ViewHolder>(DiffCallback())
         private val listener: Listener?
     ) : RecyclerView.ViewHolder(binding.root) {
         fun displayData(apply: Apply) {
-            binding.tvJobName.text = apply.jobApply
+            binding.tvJobName.text = apply.title
             binding.tvSalary.text = apply.salary.toString()
             binding.tvAddress.text = apply.location
-            binding.tvCandidateName.text = "Applied by ${apply.candidateApply}"
+            binding.tvCandidateName.text = "Applied by ${apply.name}"
             itemView.setOnClickListener {
                 listener?.onClick(adapterPosition)
             }

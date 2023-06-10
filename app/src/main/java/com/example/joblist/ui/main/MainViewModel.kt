@@ -143,11 +143,11 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    fun getAllApplies() {
+    fun getAllApplies(id: Long) {
         job = viewModelScope.launch(coroutineExceptionHandler) {
             _applyState.emit(Resource.Loading(true))
             withContext(Dispatchers.IO) {
-                val response = appService.getAllApplies().awaitResponse()
+                val response = appService.getAllApplies(id).awaitResponse()
                 _applyState.emit(
                     if (response.isSuccessful) Resource.Success(
                         response.body(), response.message()

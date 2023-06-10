@@ -84,7 +84,7 @@ class HomeFragment : BaseFragment() {
         }"
 
         activityViewModel.getAllNews(requireContext())
-        activityViewModel.getAllApplies()
+        activityViewModel.getAllApplies(SharedPreferencesUtils.loadString(requireContext(), Constants.KEY_UID).toLong())
     }
 
     private fun setObserver() {

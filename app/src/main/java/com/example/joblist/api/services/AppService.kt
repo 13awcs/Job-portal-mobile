@@ -6,8 +6,8 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface  AppService {
-    @GET("candidate/apply/applies/newest")
-    fun getAllApplies(): Call<ApplyResponse>
+    @GET("candidate/apply/applies/newest/{id}")
+    fun getAllApplies(@Path("id") id: Long): Call<ApplyResponse>
 
     @POST("/recruit/recruiter/login")
     fun login(@Body login: Login): Call<UserResponse>
